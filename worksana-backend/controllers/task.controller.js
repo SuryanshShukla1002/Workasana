@@ -31,3 +31,15 @@ export const updateTask = async (req, res, next) => {
         next(error);
     }
 };
+
+export const deleteTask = async (req, res, next) => {
+    try {
+        const taskDeletion = await Task.findByIdAndDelete(req.params.id);
+        if (!taskDeletion) {
+            return next(errorHandler(404, "Task not found"));
+        }
+        res.status(201).json({ message: "Task deleted Successfully" });
+    } catch (error) {
+        next(error);
+    }
+};
