@@ -5,7 +5,14 @@ import { errorHandler } from '../utils/error.js';
 export const createTask = async (req, res, next) => {
     try {
         const task = await Task.create(req.body);
-        res.status(201).json(task);
+        if (task) {
+            const populatedTask = await Task.findById(task._id).populate("project", "name")
+                .populate("team", "name description")
+                .populate("owners", "name email");
+            res.status(201).json(populatedTask);
+        } else {
+            res.status(404).json({ message: "Unable to create the leads" });
+        }
     } catch (error) {
         next(error);
     }
@@ -13,7 +20,9 @@ export const createTask = async (req, res, next) => {
 
 export const getAllTask = async (req, res, next) => {
     try {
-        const getTask = await Task.find();
+        const getTask = await Task.find().populate("project", "name")
+            .populate("team", "name description")
+            .populate("owners", "name email");
         if (!getTask) {
             return next(errorHandler(404, "Tasks not found"));
         }
@@ -26,7 +35,17 @@ export const getAllTask = async (req, res, next) => {
 export const updateTask = async (req, res, next) => {
     try {
         const taskupdation = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        res.status(201).json(taskupdation);
+
+        if (!taskupdation) {
+            return next(errorHandler(404, "Task not found"));
+        }
+
+        if (taskupdation) {
+            const populatedTasKUpdation = await Task.findById(taskupdation._id).populate("project", "name").populate("team", "name description")
+                .populate("owners", "name email");
+
+            res.status(200).json(populatedTasKUpdation);
+        }
     } catch (error) {
         next(error);
     }
@@ -38,7 +57,7 @@ export const deleteTask = async (req, res, next) => {
         if (!taskDeletion) {
             return next(errorHandler(404, "Task not found"));
         }
-        res.status(201).json({ message: "Task deleted Successfully" });
+        res.status(200).json({ message: "Task deleted Successfully" });
     } catch (error) {
         next(error);
     }
