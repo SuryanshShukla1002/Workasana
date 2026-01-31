@@ -1,11 +1,32 @@
-import { Button } from "@/components/ui/button"
+import { Route, Routes } from "react-router-dom";
+import SignUp from "./pages/SignUp";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import ProjectManage from "./pages/ProjectManage";
+import TaskCreation from "./pages/TaskCreation";
+import TaskDetail from "./pages/TaskDetail";
+import Report from "./pages/Report";
+import TeamManagement from "./pages/TeamManagement";
+import ProtectedRoute from "./pages/ProtectedRoute";
 
 function App() {
   return (
-    <div className="flex min-h-svh flex-col items-center justify-center">
-      <Button>Click me</Button>
-    </div>
-  )
+    <>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/signUp" element={<SignUp />} />
+
+        <Route element={<ProtectedRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/project-manage" element={<ProjectManage />} />
+          <Route path="/task" element={<TaskCreation />} />
+          <Route path="/task-detail" element={<TaskDetail />} />
+          <Route path="/report" element={<Report />} />
+          <Route path="/team-manage" element={<TeamManagement />} />
+        </Route>
+      </Routes>
+    </>
+  );
 }
 
-export default App
+export default App;
