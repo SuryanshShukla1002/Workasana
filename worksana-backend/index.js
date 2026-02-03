@@ -8,6 +8,7 @@ import projectsRouter from './routes/projects.route.js';
 import tagRouter from './routes/tag.route.js';
 import cookieParser from 'cookie-parser';
 import reportRouter from './routes/report.route.js';
+import userRouter from './routes/user.route.js';
 
 const app = express();
 
@@ -26,7 +27,7 @@ app.use("/api/team", teamRouter);
 app.use("/api/project", projectsRouter);
 app.use("/api/tag", tagRouter);
 app.use("/api/report", reportRouter);
-
+app.use("/api/users", userRouter);
 
 
 
