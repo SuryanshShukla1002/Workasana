@@ -18,7 +18,9 @@ const Login = () => {
     email: "",
     password: "",
   });
+
   const navigate = useNavigate();
+
   const userLogin = async (e) => {
     e.preventDefault();
     try {
@@ -42,14 +44,17 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <Card className="w-full max-w-sm">
+    <div className="min-h-screen flex items-center justify-center px-4 sm:px-0">
+      <Card className="w-full max-w-sm sm:max-w-md">
         <CardHeader>
-          <CardTitle className="text-center">Login to your account</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-center text-xl sm:text-2xl">
+            Login to your account
+          </CardTitle>
+          <CardDescription className="text-center">
             Enter email and pass below to login to your account
           </CardDescription>
         </CardHeader>
+
         <CardContent>
           <form onSubmit={userLogin}>
             <div className="flex flex-col gap-6">
@@ -66,6 +71,7 @@ const Login = () => {
                   }}
                 />
               </div>
+
               <div className="grid gap-2">
                 <div className="flex items-center">
                   <Label htmlFor="password">Password</Label>
@@ -80,25 +86,26 @@ const Login = () => {
                   }}
                 />
               </div>
+
               <Button type="submit" className="w-full cursor-pointer">
                 Login
               </Button>
             </div>
           </form>
         </CardContent>
+
         <CardFooter className="flex-col gap-2">
-          <div>
-            <CardAction>
-              <Link to={"/signUp"}>
-                <Button variant="link" className="cursor-pointer">
-                  New here? Sign Up
-                </Button>
-              </Link>
-            </CardAction>
-          </div>
+          <CardAction>
+            <Link to={"/signUp"}>
+              <Button variant="link" className="cursor-pointer">
+                New here? Sign Up
+              </Button>
+            </Link>
+          </CardAction>
         </CardFooter>
       </Card>
     </div>
   );
 };
+
 export default Login;
