@@ -31,6 +31,4 @@ app.use("/api/users", userRouter);
 
 
 
-app.listen(process.env.PORT, () => {
-    console.log(`Successfully running on ${process.env.PORT}`);
-});
+export default app;
