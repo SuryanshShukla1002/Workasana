@@ -8,6 +8,11 @@ import TaskDetail from "./pages/TaskDetail";
 import Report from "./pages/Report";
 import TeamManagement from "./pages/TeamManagement";
 import ProtectedRoute from "./pages/ProtectedRoute";
+import Team from "./pages/Team";
+import Project from "./pages/Project";
+import TaskList from "./pages/TaskList";
+import { ProjectsList } from "./pages/ProjectsList";
+import Settings from "./pages/Settings";
 
 function App() {
   return (
@@ -18,11 +23,19 @@ function App() {
 
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/project-manage" element={<ProjectManage />} />
+          <Route path="/project-list" element={<ProjectsList />} />
+          <Route
+            path="/project-manage/:projectId"
+            element={<ProjectManage />}
+          />
           <Route path="/task" element={<TaskCreation />} />
-          <Route path="/task-detail" element={<TaskDetail />} />
+          <Route path="/team-create" element={<Team />} />
+          <Route path="/tasklist" element={<TaskList />} />
+          <Route path="/project-create" element={<Project />} />
+          <Route path="/task-detail/:detailId" element={<TaskDetail />} />
           <Route path="/report" element={<Report />} />
           <Route path="/team-manage" element={<TeamManagement />} />
+          <Route path="/settings" element={<Settings />} />
         </Route>
       </Routes>
     </>
